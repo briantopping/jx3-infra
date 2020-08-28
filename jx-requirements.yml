@@ -9,8 +9,8 @@ buildPacks:
 cluster:
   clusterName: ""
   devEnvApprovers:
-  - todo
-  environmentGitOwner: "todo"
+  - briantopping
+  environmentGitOwner: "briantopping"
   gitKind: github
   gitName: github
   gitServer: https://github.com
