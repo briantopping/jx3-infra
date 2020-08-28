@@ -1,0 +1,32 @@
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-credential-initializer-hnhdt[0m
+{"level":"info","ts":1598641313.8931832,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1598641313.8952315,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-working-dir-initializer-4hjpk[0m
+{"level":"info","ts":1598641314.9682283,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1598641314.9705625,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-git-source-briantopping-jx3-infra-master-p-t54ch-nbmv2[0m
+{"level":"info","ts":1598641320.1138742,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1598641320.6254928,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/************/**3-infra.git @ v0.0.2 in path /workspace/source"}
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-setup-builder-home[0m
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:1db4f7bea1f2827a4cf21fff03f2fa48f1cb15ef
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-release[0m
+make: Nothing to be done for 'release'.
+
+Showing logs for build [32mbriantopping-jx3-infra-master-p-t54ch-2[0m stage [32mrelease[0m and container [32mstep-log-apply[0m
+waiting for the Git Operator to be ready in namespace **...
+pod **-git-operator-5bc86669-sdnbr has status Ready
+the Git Operator is running in pod **-git-operator-5bc86669-sdnbr
+
+waiting for boot Job pod with selector app=**-boot in namespace ** for commit SHA 1db4f7bea1f2827a4cf21fff03f2fa48f1cb15ef...
+waiting for Job **-boot-1db4f7bea1f2827a4cf21ff to complete...
+boot Job **-boot-1db4f7bea1f2827a4cf21ff has Succeeded
