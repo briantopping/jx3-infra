@@ -9,6 +9,10 @@ data:
               required_status_checks:
                 contexts:
                 - promotion-build
+            jx3-project-test:
+              required_status_checks:
+                contexts:
+                - pr-build
       protect-tested-repos: true
     deck:
       spyglass: {}
@@ -24,12 +28,25 @@ data:
         - master
         name: promotion
         skip_report: true
+      briantopping/jx3-project-test:
+      - agent: tekton
+        branches:
+        - master
+        name: release
+        skip_report: true
     presubmits:
       briantopping/jx3-infra:
       - agent: tekton
         always_run: true
         context: promotion-build
         name: promotion-build
+        rerun_command: /test this
+        trigger: (?m)^/test( all| this),?(\s+|$)
+      briantopping/jx3-project-test:
+      - agent: tekton
+        always_run: true
+        context: pr-build
+        name: pr-build
         rerun_command: /test this
         trigger: (?m)^/test( all| this),?(\s+|$)
     prowjob_namespace: jx
@@ -39,10 +56,11 @@ data:
     tide:
       context_options:
         from-branch-protection: true
-        required-if-present-contexts: []
+        required-if-present-contexts: null
         skip-unknown-contexts: false
       merge_method:
         briantopping/jx3-infra: merge
+        briantopping/jx3-project-test: merge
       queries:
       - labels:
         - approved
@@ -54,6 +72,7 @@ data:
         - needs-rebase
         repos:
         - briantopping/jx3-infra
+        - briantopping/jx3-project-test
       - labels:
         - updatebot
         missingLabels:
@@ -64,6 +83,7 @@ data:
         - needs-rebase
         repos:
         - briantopping/jx3-infra
+        - briantopping/jx3-project-test
       target_url: http://deck-jx.34.123.92.138.nip.io
 kind: ConfigMap
 metadata:

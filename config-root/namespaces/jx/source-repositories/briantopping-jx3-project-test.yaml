@@ -1,0 +1,21 @@
+apiVersion: jenkins.io/v1
+kind: SourceRepository
+metadata:
+  creationTimestamp: null
+  labels:
+    owner: briantopping
+    provider: github
+    repository: jx3-project-test
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: briantopping-jx3-project-test
+spec:
+  httpCloneURL: https://github.com/briantopping/jx3-project-test.git
+  org: briantopping
+  provider: https://github.com
+  providerKind: github
+  providerName: github
+  repo: jx3-project-test
+  scheduler:
+    kind: ""
+    name: ""
+  url: https://github.com/briantopping/jx3-project-test
