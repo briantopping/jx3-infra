@@ -64,7 +64,7 @@ data:
         - needs-rebase
         repos:
         - briantopping/jx3-infra
-      target_url: http://deck-jx.
+      target_url: http://deck-jx.34.123.92.138.nip.io
 kind: ConfigMap
 metadata:
   creationTimestamp: null
