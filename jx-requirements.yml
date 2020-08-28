@@ -7,31 +7,53 @@ buildPacks:
     gitRef: master
     gitURL: https://github.com/jenkins-x/jxr-packs-kubernetes.git
 cluster:
-  clusterName: ""
+  clusterName: infrak8s-dev
   devEnvApprovers:
   - briantopping
-  environmentGitOwner: "briantopping"
+  environmentGitOwner: briantopping
   gitKind: github
   gitName: github
   gitServer: https://github.com
+  gke:
+    projectNumber: "411516393686"
   namespace: jx
-  project:  ""
+  project: atvi-test2
   provider: gke
   registry: gcr.io
-  zone: ""
+  zone: us-central1-a
 environments:
-- key: dev
-  owner: ""
-  repository: ""
-- key: staging
-  owner: ""
-  repository: ""
-- key: production
-  owner: ""
-  repository: ""
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: dev
+  owner: briantopping
+  repository: jx3-infra
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
 gitops: true
 ingress:
-  domain: ""
+  domain: 34.123.92.138.nip.io
   externalDNS: false
   namespaceSubDomain: -jx.
   tls:
