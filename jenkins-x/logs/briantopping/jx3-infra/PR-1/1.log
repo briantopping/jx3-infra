@@ -1,0 +1,474 @@
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-credential-initializer-fjfl4[0m
+{"level":"info","ts":1598640949.5862525,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1598640949.5867782,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-working-dir-initializer-hnv9c[0m
+{"level":"info","ts":1598640950.232982,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1598640950.2372563,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-git-source-briantopping-jx3-infra-pr-1-pro-ssdbk-svcj5[0m
+{"level":"info","ts":1598640975.5168846,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1598640976.048193,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/************/**3-infra.git @ master in path /workspace/source"}
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-setup-builder-home[0m
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:eb64a7eef7fc5e5caaa407a226455df34aa5049b,1:b16fe404daf07c709d9bc7ed6c90b8deec8cd1a4
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow b16fe404daf07c709d9bc7ed6c90b8deec8cd1a4: eb64a7eef7fc5e5caaa407a226455df34aa5049b:
+DEBUG: ran git fetch --unshallow origin b16fe404daf07c709d9bc7ed6c90b8deec8cd1a4: eb64a7eef7fc5e5caaa407a226455df34aa5049b: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard eb64a7eef7fc5e5caaa407a226455df34aa5049b
+DEBUG: ran git reset --hard eb64a7eef7fc5e5caaa407a226455df34aa5049b in 
+DEBUG: JX_LOG_LEVEL=error LC_ALL=C git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge b16fe404daf07c709d9bc7ed6c90b8deec8cd1a4
+DEBUG: ran git merge b16fe404daf07c709d9bc7ed6c90b8deec8cd1a4 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e eb64a7eef7fc5e5caaa407a226455df34aa5049b..HEAD
+Merged SHA b16fe404daf07c709d9bc7ed6c90b8deec8cd1a4 with commit message 'chore(deps): bump https://github.com/************/**3-project-test.git' into base branch master
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-git-credentials[0m
+Generated Git credentials file /workspace/xdg_config/git/credentials
+
+Showing logs for build [32mbriantopping-jx3-infra-pr-1-pro-ssdbk-1[0m stage [32mpr-checks[0m and container [32mstep-pr[0m
+rm -rf build config-root
+# lets create any missing SourceRepository defined in .**/gitops/source-config.yaml which are not in: versionStream/src/base/namespaces/**/source-repositories
+** gitops repository create
+created file config-root/namespaces/**/source-repositories/************-**3-project-test.yaml
+mkdir -p build/base
+mkdir -p build/tmp
+mkdir -p config-root/namespaces/**
+cp -r versionStream/src/* build
+mkdir -p build/base/cluster/crds
+# lets configure the cluster gitops repository URL on the requirements if its missing
+** gitops repository resolve --source-dir config-root/namespaces
+modifying **-requirements.yml in dir . to set the dev environment git repository to be ************/**3-infra
+saving **-requirements.yml
+discovered git URL *****************************************.git replacing it in the dev Environment and Source Repository in dir config-root/namespaces
+# set any missing defaults in the secrets mapping file
+** secret convert edit
+saved file: /workspace/source/.**/secret/mapping/secret-mappings.yaml
+# lets resolve chart versions and values from the version stream
+** gitops helmfile resolve
+generated helm YAML file from ** requirements at **-values.yaml
+resolving versions and values files from the version stream https://github.com/jenkins-x/**r-versions.git ref master in dir versionStream
+about to run: helm repo add ** http://chartmuseum.jenkins-x.io
+"**" has been added to your repositories
+about to run: helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+"jenkins-x" has been added to your repositories
+about to run: helm repo add external-secrets https://godaddy.github.io/kubernetes-external-secrets
+"external-secrets" has been added to your repositories
+about to run: helm repo add **-labs https://storage.googleapis.com/jenkinsxio-labs-private/charts
+"**-labs" has been added to your repositories
+about to run: helm repo add stable https://kubernetes-charts.storage.googleapis.com
+"stable" has been added to your repositories
+about to run: helm repo add banzaicloud-stable https://kubernetes-charts.banzaicloud.com
+"banzaicloud-stable" has been added to your repositories
+# lets make sure we are using the latest **-cli in the git operator Job
+** gitops image -s .**/git-operator
+# this line avoids the next helmfile command failing...
+helm repo add ** http://chartmuseum.jenkins-x.io
+"**" has been added to your repositories
+# generate the yaml from the charts in helmfile.yaml and moves them to the right directory tree (cluster or namespaces/foo)
+** gitops helmfile template  --args="--include-crds --values=**-values.yaml --values=versionStream/src/fake-secrets.yaml.gotmpl" --output-dir config-root
+about to run: helm repo add ** http://chartmuseum.jenkins-x.io
+"**" has been added to your repositories
+about to run: helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+"jenkins-x" has been added to your repositories
+about to run: helm repo add external-secrets https://godaddy.github.io/kubernetes-external-secrets
+"external-secrets" has been added to your repositories
+about to run: helm repo add **-labs https://storage.googleapis.com/jenkinsxio-labs-private/charts
+"**-labs" has been added to your repositories
+about to run: helm repo add stable https://kubernetes-charts.storage.googleapis.com
+"stable" has been added to your repositories
+about to run: helm repo add banzaicloud-stable https://kubernetes-charts.banzaicloud.com
+"banzaicloud-stable" has been added to your repositories
+generating helm templates to dir config-root
+about to run: helmfile --file helmfile-namespace-nginx.yaml --namespace nginx template -args --include-crds --values=**-values.yaml --values=versionStream/src/fake-secrets.yaml.gotmpl --output-dir /tmp/877853248/nginx
+Adding repo stable https://kubernetes-charts.storage.googleapis.com
+"stable" has been added to your repositories
+
+Fetching stable/nginx-ingress
+Building dependency release=nginx-ingress, chart=/tmp/913989953/nginx/nginx-ingress/stable/nginx-ingress/1.39.1/nginx-ingress
+Templating release=nginx-ingress, chart=/tmp/913989953/nginx/nginx-ingress/stable/nginx-ingress/1.39.1/nginx-ingress
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/controller-poddisruptionbudget.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/controller-serviceaccount.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/default-backend-serviceaccount.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/clusterrole.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/clusterrolebinding.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/controller-role.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/controller-rolebinding.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/controller-service.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/default-backend-service.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/controller-deployment.yaml
+wrote /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress/templates/default-backend-deployment.yaml
+
+
+processing chart dir /tmp/877853248/nginx/helmfile-namespace-nginx-5a3259f8-nginx-ingress/nginx-ingress
+no Namespace resource nginx so created file config-root/cluster/namespaces/nginx.yaml
+about to run: helmfile --file helmfile-namespace-**.yaml --namespace ** template -args --include-crds --values=**-values.yaml --values=versionStream/src/fake-secrets.yaml.gotmpl --output-dir /tmp/877853248/**
+Adding repo jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+"jenkins-x" has been added to your repositories
+
+Adding repo **-labs https://storage.googleapis.com/jenkinsxio-labs-private/charts
+"**-labs" has been added to your repositories
+
+Fetching **-labs/jenkins-x-crds
+Fetching jenkins-x/**boot-helmfile-resources
+Fetching jenkins-x/tekton
+Fetching jenkins-x/lighthouse
+Fetching jenkins-x/nexus
+Fetching jenkins-x/chartmuseum
+Building dependency release=**boot-helmfile-resources, chart=/tmp/856430733/**/**boot-helmfile-resources/jenkins-x/**boot-helmfile-resources/0.0.283/**boot-helmfile-resources
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "external-secrets" chart repository
+...Successfully got an update from the "**-labs" chart repository
+...Successfully got an update from the "banzaicloud-stable" chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "**" chart repository
+...Successfully got an update from the "jenkins-x" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 5 charts
+Downloading ** from repo http://chartmuseum.jenkins-x.io
+Already downloaded ** from repo http://chartmuseum.jenkins-x.io
+Already downloaded ** from repo http://chartmuseum.jenkins-x.io
+Already downloaded ** from repo http://chartmuseum.jenkins-x.io
+Already downloaded ** from repo http://chartmuseum.jenkins-x.io
+Deleting outdated charts
+
+Building dependency release=jenkins-x-crds, chart=/tmp/856430733/**/jenkins-x-crds/**-labs/jenkins-x-crds/0.0.7/jenkins-x-crds
+Building dependency release=tekton, chart=/tmp/856430733/**/tekton/jenkins-x/tekton/0.0.56/tekton
+Building dependency release=lighthouse, chart=/tmp/856430733/**/lighthouse/jenkins-x/lighthouse/0.0.683/lighthouse
+Building dependency release=nexus, chart=/tmp/856430733/**/nexus/jenkins-x/nexus/0.1.35/nexus
+Building dependency release=chartmuseum, chart=/tmp/856430733/**/chartmuseum/jenkins-x/chartmuseum/1.1.7/chartmuseum
+Templating release=**boot-helmfile-resources, chart=/tmp/856430733/**/**boot-helmfile-resources/jenkins-x/**boot-helmfile-resources/0.0.283/**boot-helmfile-resources
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerbuild/templates/serviceaccount.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerrole/templates/serviceaccount.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcactivities/templates/serviceaccount.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpods/templates/serviceaccount.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpreviews/templates/serviceaccount.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/docker-cfg-secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/gh-secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/maven-settings-secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/npm-token-secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/release-gpg-secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/ingress-config-configmap.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-devpod-config.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-docker-registry.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-extensions-config.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/jenkins-x-pod-templates.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerbuild/templates/clusterrole.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerrole/templates/clusterrole.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcactivities/templates/clusterrole.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpreviews/templates/clusterrole.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerbuild/templates/clusterrolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerrole/templates/clusterrolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcactivities/templates/clusterrolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpreviews/templates/clusterrolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerbuild/templates/role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerrole/templates/role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcactivities/templates/role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpods/templates/role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpreviews/templates/role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/committer-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/**-pipeline-activity-reporter-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/**-view-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/owner-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/viewer-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerbuild/templates/rolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerrole/templates/rolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcactivities/templates/rolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpods/templates/rolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpreviews/templates/rolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerbuild/templates/deployment.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerrole/templates/deployment.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcactivities/templates/cronjob.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpods/templates/cronjob.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpreviews/templates/cronjob.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/700-chartmuseum-ing.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/700-hook-ing.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/700-nexus-ing.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/buildpacks.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/buildpacks.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/environments.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/environments.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/environments.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerbuild/templates/release.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/controllerrole/templates/release.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcactivities/templates/release.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpods/templates/release.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/charts/gcpreviews/templates/release.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/default-scheduler.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/env-scheduler.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/pr-only-scheduler.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/release-only-scheduler.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources/templates/repositories.yaml
+
+
+Templating release=jenkins-x-crds, chart=/tmp/856430733/**/jenkins-x-crds/**-labs/jenkins-x-crds/0.0.7/jenkins-x-crds
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/apps-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/buildpacks-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/commitstatuses-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/environmentrolebindings-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/environments-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/extensions-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/facts-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/gitservices-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/pipelineactivities-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/pipelinestructures-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/plugins-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/releases-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/schedulers-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/sourcerepositories-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/sourcerepositorygroups-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/teams-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/users-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds/templates/workflows-crd.yaml
+
+
+Templating release=tekton, chart=/tmp/856430733/**/tekton/jenkins-x/tekton/0.0.56/tekton
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/101-podsecuritypolicy.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/250-serviceaccount.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/251-bot-serviceaccount.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/250-docker-secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/250-git-secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/config-artifact-bucket.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/config-artifact-pvc.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/config-defaults.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/config-entrypoint.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/config-logging.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/config-observability.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-clustertask.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-condition.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-imagecache.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-pipeline.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-pipelinerun.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-resource.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-task.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/300-taskrun.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/200-clusterrole.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/build-bot-clusterrole.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/clusterrole-aggregate-edit.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/clusterrole-aggregate-view.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/200-clusterrolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/build-bot-clusterrolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/build-bot-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/build-bot-rolebinding.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/400-controller-service.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton/templates/controller.yaml
+
+
+Templating release=lighthouse, chart=/tmp/856430733/**/lighthouse/jenkins-x/lighthouse/0.0.683/lighthouse
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/foghorn-sa.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/gc-jobs-sa.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/**-controller-sa.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/keeper-sa.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/webhooks-sa.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/hmacsecret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/oauthsecret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/lighthousejobs-crd.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/foghorn-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/gc-jobs-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/**-controller-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/keeper-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/webhooks-role.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/foghorn-rb.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/gc-jobs-rb.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/**-controller-rb.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/keeper-rb.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/webhooks-rb.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/keeper-service.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/webhooks-service.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/foghorn-deployment.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/**-controller-deployment.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/keeper-deployment.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/webhooks-deployment.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse/templates/gc-jobs-cj.yaml
+
+
+Templating release=nexus, chart=/tmp/856430733/**/nexus/jenkins-x/nexus/0.1.35/nexus
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-nexus/nexus/templates/secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-nexus/nexus/templates/config.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-nexus/nexus/templates/pvc.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-nexus/nexus/templates/service.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-nexus/nexus/templates/deployment.yaml
+
+
+Templating release=chartmuseum, chart=/tmp/856430733/**/chartmuseum/jenkins-x/chartmuseum/1.1.7/chartmuseum
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-chartmuseum/chartmuseum/templates/secret.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-chartmuseum/chartmuseum/templates/pvc.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-chartmuseum/chartmuseum/templates/service.yaml
+wrote /tmp/877853248/**/helmfile-namespace-**-7ca7038c-chartmuseum/chartmuseum/templates/deployment.yaml
+
+
+processing chart dir /tmp/877853248/**/helmfile-namespace-**-7ca7038c-chartmuseum/chartmuseum
+processing chart dir /tmp/877853248/**/helmfile-namespace-**-7ca7038c-jenkins-x-crds/jenkins-x-crds
+processing chart dir /tmp/877853248/**/helmfile-namespace-**-7ca7038c-**boot-helmfile-resources/**boot-helmfile-resources
+processing chart dir /tmp/877853248/**/helmfile-namespace-**-7ca7038c-lighthouse/lighthouse
+processing chart dir /tmp/877853248/**/helmfile-namespace-**-7ca7038c-nexus/nexus
+processing chart dir /tmp/877853248/**/helmfile-namespace-**-7ca7038c-tekton/tekton
+no Namespace resource ** so created file config-root/cluster/namespaces/**.yaml
+about to run: helmfile --file helmfile-namespace-secret-infra.yaml --namespace secret-infra template -args --include-crds --values=**-values.yaml --values=versionStream/src/fake-secrets.yaml.gotmpl --output-dir /tmp/877853248/secret-infra
+Adding repo external-secrets https://godaddy.github.io/kubernetes-external-secrets
+"external-secrets" has been added to your repositories
+
+Adding repo **-labs https://storage.googleapis.com/jenkinsxio-labs-private/charts
+"**-labs" has been added to your repositories
+
+Adding repo banzaicloud-stable https://kubernetes-charts.banzaicloud.com
+"banzaicloud-stable" has been added to your repositories
+
+Fetching external-secrets/kubernetes-external-secrets
+Fetching banzaicloud-stable/vault-operator
+Fetching **-labs/vault-instance
+Fetching **-labs/pusher-wave
+Building dependency release=kubernetes-external-secrets, chart=/tmp/062392124/secret-infra/kubernetes-external-secrets/external-secrets/kubernetes-external-secrets/4.0.0/kubernetes-external-secrets
+Building dependency release=vault-operator, chart=/tmp/062392124/secret-infra/vault-operator/banzaicloud-stable/vault-operator/1.3.0/vault-operator
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "external-secrets" chart repository
+...Successfully got an update from the "**-labs" chart repository
+...Successfully got an update from the "banzaicloud-stable" chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "**" chart repository
+...Successfully got an update from the "jenkins-x" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 1 charts
+Downloading etcd-operator from repo https://kubernetes-charts.storage.googleapis.com/
+Deleting outdated charts
+
+Building dependency release=vault-instance, chart=/tmp/062392124/secret-infra/vault-instance/**-labs/vault-instance/0.0.1/vault-instance
+Building dependency release=pusher-wave, chart=/tmp/062392124/secret-infra/pusher-wave/**-labs/pusher-wave/1.0.0/pusher-wave
+Templating release=kubernetes-external-secrets, chart=/tmp/062392124/secret-infra/kubernetes-external-secrets/external-secrets/kubernetes-external-secrets/4.0.0/kubernetes-external-secrets
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets/crds/kubernetes-client.io_externalsecrets_crd.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets/templates/serviceaccount.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets/templates/rbac.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets/templates/rbac.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets/templates/rbac.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets/templates/service.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets/templates/deployment.yaml
+
+
+Templating release=vault-operator, chart=/tmp/062392124/secret-infra/vault-operator/banzaicloud-stable/vault-operator/1.3.0/vault-operator
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-operator/vault-operator/crds/crd.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-operator/vault-operator/templates/sa.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-operator/vault-operator/templates/role.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-operator/vault-operator/templates/rolebinding.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-operator/vault-operator/templates/service.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-operator/vault-operator/templates/deployment.yaml
+
+
+Templating release=vault-instance, chart=/tmp/062392124/secret-infra/vault-instance/**-labs/vault-instance/0.0.1/vault-instance
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-instance/vault-instance/templates/sa.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-instance/vault-instance/templates/pvc.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-instance/vault-instance/templates/cluster-role-binding.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-instance/vault-instance/templates/role.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-instance/vault-instance/templates/role-binding.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-instance/vault-instance/templates/cr.yaml
+
+
+Templating release=pusher-wave, chart=/tmp/062392124/secret-infra/pusher-wave/**-labs/pusher-wave/1.0.0/pusher-wave
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-pusher-wave/pusher-wave/templates/serviceaccount.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-pusher-wave/pusher-wave/templates/clusterrole.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-pusher-wave/pusher-wave/templates/clusterrolebinding.yaml
+wrote /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-pusher-wave/pusher-wave/templates/deployment.yaml
+
+
+processing chart dir /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-kubernetes-external-secrets/kubernetes-external-secrets
+processing chart dir /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-pusher-wave/pusher-wave
+processing chart dir /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-instance/vault-instance
+processing chart dir /tmp/877853248/secret-infra/helmfile-namespace-secret-infra-7f3608e8-vault-operator/vault-operator
+no Namespace resource secret-infra so created file config-root/cluster/namespaces/secret-infra.yaml
+# convert k8s Secrets => ExternalSecret resources using secret mapping + schemas
+# see: https://github.com/jenkins-x/**-secret#mappings
+** secret convert --dir config-root
+cp -r ./build/base/* config-root
+rm config-root/kustomization.yaml
+# lets generate the lighthouse configuration
+** gitops scheduler -d config-root/namespaces/** -o versionStream/src/base/namespaces/**/lighthouse-config
+loaded Scheduler name default in namespace **
+loaded Scheduler name environment in namespace **
+loaded Environment name dev in namespace **
+loaded Scheduler name pr-only in namespace **
+loaded Scheduler name release-only in namespace **
+loaded SourceRepository name dev in namespace **
+loaded SourceRepository name ************-**3-project-test in namespace 
+generated config ConfigMap versionStream/src/base/namespaces/**/lighthouse-config/config-cm.yaml and plugins ConfigMap versionStream/src/base/namespaces/**/lighthouse-config/plugins-cm.yaml
+# lets add the kubectl-apply prune annotations
+#
+# NOTE be very careful about these 2 labels as getting them wrong can remove stuff in you cluster!
+** gitops label --dir config-root/cluster    gitops.jenkins-x.io/pipeline=cluster
+** gitops label --dir config-root/namespaces gitops.jenkins-x.io/pipeline=namespaces
+# lets enable pusher-wave to perform rolling updates of any Deployment when its underlying Secrets get modified
+# by modifying the underlying secret store (e.g. vault / GSM / ASM) which then causes External Secrets to modify the k8s Secrets
+** gitops annotate --dir  config-root/namespaces --kind Deployment wave.pusher.com/update-on-config-change=true
+# lets force a rolling upgrade of lighthouse pods whenever we update the lighthouse config...
+** gitops hash -s config-root/namespaces/**/lighthouse-config/config-cm.yaml -s config-root/namespaces/**/lighthouse-config/plugins-cm.yaml -d config-root/namespaces/**/lighthouse
+added annotation: jenkins-x.io/hash=35aefe3db7079732a972311e54cdb93ced2293370710697718af399e4442e526 to Deployments in dir config-root/namespaces/**/lighthouse
+git add *
+The following paths are ignored by one of your .gitignore files:
+build
+Use -f if you really want to add them.
+git status
+make: [versionStream/src/Makefile.mk:172: commit] Error 1 (ignored)
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   config-root/namespaces/**/source-repositories/************-**3-project-test.yaml
+	modified:   versionStream/src/base/namespaces/**/lighthouse-config/config-cm.yaml
+	modified:   versionStream/src/base/namespaces/**/lighthouse-config/plugins-cm.yaml
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   .**/secret/mapping/secret-mappings.yaml
+
+# lets ignore commit errors in case there's no changes and to stop pipelines failing
+git commit -m "chore: regenerated"
+[master b738a0b] chore: regenerated
+ 3 files changed, 67 insertions(+), 1 deletion(-)
+ create mode 100644 config-root/namespaces/**/source-repositories/************-**3-project-test.yaml
+** gitops pr push
+about to run: git config --get user.name
+jenkins-x-bot
+about to run: git config --get user.email
+jenkins-x@googlegroups.com
+about to run: git config --global credential.helper store in dir /builder/home
+about to run: git checkout -b bump-resource-version-56275667-609e-4ba7-9b22-aebe61d48f0e
+Switched to a new branch 'bump-resource-version-56275667-609e-4ba7-9b22-aebe61d48f0e'
+M	.**/secret/mapping/secret-mappings.yaml
+about to run: git push origin bump-resource-version-56275667-609e-4ba7-9b22-aebe61d48f0e
+To https://github.com/************/**3-infra.git
+   b16fe40..b738a0b  bump-resource-version-56275667-609e-4ba7-9b22-aebe61d48f0e -> bump-resource-version-56275667-609e-4ba7-9b22-aebe61d48f0e
