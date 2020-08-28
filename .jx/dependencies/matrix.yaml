@@ -1,0 +1,7 @@
+dependencies:
+- host: github.com
+  owner: briantopping
+  repo: jx3-project-test
+  url: https://github.com/briantopping/jx3-project-test.git
+  version: ""
+  versionURL: ""
